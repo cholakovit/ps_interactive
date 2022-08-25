@@ -2,18 +2,18 @@
 import { styled } from "@mui/material/styles";
 
 // MUI Elements
-import { AppBar, FormControlLabel, Switch } from "@mui/material";
+import AppBar from "@mui/material/AppBar";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import Switch from "@mui/material/Switch";
 
-export const OutdoorsyAppBar = styled(AppBar)(({ theme }) => ({
+export const PsAppBar = styled(AppBar)(({ theme }) => ({
   backgroundColor: theme.palette.primary.black,
 }));
 
-export const OutdoorsyFormControlLabel = styled(FormControlLabel)(
-  ({ theme }) => ({
-    margin: "10px",
-    float: "right",
-  })
-);
+export const PsFormControlLabel = styled(FormControlLabel)(({ theme }) => ({
+  margin: "10px",
+  float: "right",
+}));
 
 //Switcher
 export const MaterialUISwitch = styled(Switch)(({ theme }) => ({

@@ -25,6 +25,7 @@ const Skeletons: FC<SkeletonProps> = ({ flag, width, height }) => {
                   height={height}
                 />
               </SkeletonBox>
+
               <SkeletonBox>
                 <Skeleton
                   variant="rectangular"
@@ -33,6 +34,61 @@ const Skeletons: FC<SkeletonProps> = ({ flag, width, height }) => {
                   height={height}
                 />
               </SkeletonBox>
+
+              <SkeletonBox>
+                <Skeleton
+                  variant="rectangular"
+                  animation="wave"
+                  width={width}
+                  height={height}
+                />
+              </SkeletonBox>
+
+              <SkeletonBox>
+                <Skeleton
+                  variant="rectangular"
+                  animation="wave"
+                  width={width}
+                  height={height}
+                />
+              </SkeletonBox>
+
+              <SkeletonBox>
+                <Skeleton
+                  variant="rectangular"
+                  animation="wave"
+                  width={width}
+                  height={height}
+                />
+              </SkeletonBox>
+
+              <SkeletonBox>
+                <Skeleton
+                  variant="rectangular"
+                  animation="wave"
+                  width={width}
+                  height={height}
+                />
+              </SkeletonBox>
+
+              <SkeletonBox>
+                <Skeleton
+                  variant="rectangular"
+                  animation="wave"
+                  width={width}
+                  height={height}
+                />
+              </SkeletonBox>
+
+              <SkeletonBox>
+                <Skeleton
+                  variant="rectangular"
+                  animation="wave"
+                  width={width}
+                  height={height}
+                />
+              </SkeletonBox>
+
               <SkeletonBox>
                 <Skeleton
                   variant="rectangular"

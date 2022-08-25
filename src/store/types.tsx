@@ -1,9 +1,6 @@
-// For the rentals slice
-export type InitialStateType = {};
-  
 // For the Theme
 export type colorModeProps = {
-  toggleColorMode?: any;
+  toggleColorMode?: () => void
 };
   
 // For Errors
@@ -22,13 +19,13 @@ export type SkeletonProps = {
 export type PartnerProps = {
     partner_id: number
     name: string
-    latitude: string
-    longitude: string
+    pic: string
+    latitude: number
+    longitude: number
+    distance: number | string
 };
 
 // For Partners
 export type PartnersProps = {
   partner: PartnerProps
 }
-
-  

@@ -1,12 +1,14 @@
-// React functional component
-//import React, { FC } from "react";
 
+// MUI Elements
 import { Avatar } from "@mui/material"
+
+// Styled Elements
 import { AvatarHolder, Partner, PartnerContent, PartnerDistance, PartnerName } from "./Partner.styles"
 
-//import { PartnerProps } from '../../store/types'
+// Types
+import { PartnerProps } from '../../store/types'
 
-const PartnerView = (props: { partner: any }) => {
+const PartnerView = (props: { partner: PartnerProps }) => {
   return (
     <Partner>  
         <AvatarHolder>

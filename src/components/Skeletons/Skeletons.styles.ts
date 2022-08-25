@@ -2,9 +2,8 @@
 import { styled } from "@mui/material/styles";
 
 // MUI Elements
-import { Box } from "@mui/material";
+import Box from "@mui/material/Box";
 
 export const SkeletonBox = styled(Box)(({ theme }) => ({
   margin: "10px 10px",
-  width: "260px",
 }));

@@ -1,16 +1,12 @@
 // Redux toolkit
 import { configureStore } from "@reduxjs/toolkit";
 
-// ps Slice
-import partnersReducer from "./partnersSlice";
-
 // ps Api
 import { psApi } from "./apiSlice";
 
 export const store = configureStore({
   reducer: {
-    [psApi.reducerPath]: psApi.reducer,
-    partners: partnersReducer,
+    [psApi.reducerPath]: psApi.reducer
   },
 
   middleware: (getDefaultMiddleware) =>

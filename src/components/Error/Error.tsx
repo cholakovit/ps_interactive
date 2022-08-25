@@ -1,15 +1,18 @@
 // MUI Elements
-import Alert from '@mui/material/Alert'
+import Alert from "@mui/material/Alert";
 
 // Functional Component
-import { FC } from 'react'
+import { FC } from "react";
 
 // Types
-import { errorProps } from '../../store/types'
+import { errorProps } from "../../store/types";
 
 const Error: FC<errorProps> = ({ error }) => {
+  return (
+    <Alert severity="error" data-testid="errorAlert">
+      {error}
+    </Alert>
+  );
+};
 
-    return <Alert severity="error" data-testid='errorAlert'>{error}</Alert>
-}
-
-export default Error
+export default Error;

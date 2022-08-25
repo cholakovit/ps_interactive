@@ -1,5 +1,5 @@
 // Styled Elements
-import { Theme, ThemeOptions, PaletteColorOptions } from "@mui/material/styles";
+import "@mui/material/styles";
 
 declare module "@mui/material/styles" {
   interface Theme {
@@ -14,11 +14,8 @@ declare module "@mui/material/styles" {
         boxWidth?: string;
       };
     };
-
   }
-  interface ThemeOptions {
-
-  }
+  interface ThemeOptions {}
 
   interface Palette {}
   interface PaletteOptions {}

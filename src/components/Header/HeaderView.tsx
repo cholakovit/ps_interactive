@@ -1,8 +1,8 @@
 // Styled Elements
 import {
   MaterialUISwitch,
-  OutdoorsyFormControlLabel,
-  OutdoorsyAppBar,
+  PsFormControlLabel,
+  PsAppBar,
 } from "./Header.styles";
 
 // MUI Elements
@@ -21,16 +21,16 @@ const HeaderView = () => {
   const colorMode: colorModeProps = useContext(ColorModeContext);
 
   return (
-    <OutdoorsyAppBar>
+    <PsAppBar>
       <Container>
-        <OutdoorsyFormControlLabel
+        <PsFormControlLabel
           label=""
           onClick={colorMode.toggleColorMode}
           control={<MaterialUISwitch defaultChecked />}
           data-testid="button"
         />
       </Container>
-    </OutdoorsyAppBar>
+    </PsAppBar>
   );
 };
 
