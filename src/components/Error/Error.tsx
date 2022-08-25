@@ -16,3 +16,8 @@ const Error: FC<errorProps> = ({ error }) => {
 };
 
 export default Error;
+
+
+
+
+
