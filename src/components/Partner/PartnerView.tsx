@@ -16,6 +16,7 @@ const PartnerView = (props: { partner: PartnerProps }) => {
         </AvatarHolder> 
         <PartnerContent>
             <PartnerName>Name: {props.partner.name}</PartnerName>
+            <PartnerName>ID: {props.partner.partner_id}</PartnerName>
             <PartnerDistance>Distance: {props.partner.distance}km.</PartnerDistance>
         </PartnerContent>
     </Partner>

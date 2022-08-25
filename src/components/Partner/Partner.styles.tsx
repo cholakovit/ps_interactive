@@ -19,7 +19,7 @@ export const AvatarHolder = styled(Box)(({ theme }) => ({
 }));
 
 export const PartnerContent = styled(Box)(({ theme }) => ({
-  width: "40%",
+  width: "45%",
   overflow: "hidden",
 }));
 

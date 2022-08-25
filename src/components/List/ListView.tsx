@@ -3,6 +3,8 @@ import { PartnersContainer, PartnersHolder } from "./List.styles";
 
 // Redux
 import { useGetPartnersQuery } from "../../store/apiSlice";
+import { useAppDispatch } from "../../store/hooks";
+import { setCoordinatesAndDistance } from "../../store/partnersSlice";
 
 // Components
 import Skeletons from "../Skeletons/SkeletonsView";
@@ -10,11 +12,20 @@ import Error from "../Error/Error";
 import PartnerView from "../Partner/PartnerView";
 
 // Types
-import { PartnerProps } from "../../store/types";
+import { PartnerProps, ListViewProps } from "../../store/types";
 
-const ListView = () => {
+// React Functional Component
+import { FC } from "react";
+
+const ListView: FC<ListViewProps> = ({ placeLat, placeLon, distance }) => {
+  const dispatch = useAppDispatch();
+  dispatch(setCoordinatesAndDistance({ placeLat, placeLon, distance }));
+
   // Getting the data: partners within distance
-  let { data, isLoading, isSuccess, isError }: any = useGetPartnersQuery("");
+  let { data, isLoading, isSuccess, isError }: any =
+    useGetPartnersQuery(placeLat);
+
+  //console.log("params", distance);
 
   return (
     <PartnersContainer>
