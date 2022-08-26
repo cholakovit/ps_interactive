@@ -15,11 +15,15 @@ import PartnerView from "../Partner/PartnerView";
 import { PartnerProps, ListViewProps } from "../../store/types";
 
 // React Functional Component
-import { FC } from "react";
+import { FC, useEffect } from "react";
 
 const ListView: FC<ListViewProps> = ({ placeLat, placeLon, distance }) => {
   const dispatch = useAppDispatch();
-  dispatch(setCoordinatesAndDistance({ placeLat, placeLon, distance }));
+  
+  useEffect(() => {
+    dispatch(setCoordinatesAndDistance({ placeLat, placeLon, distance }));
+  }, [placeLat, placeLon, distance, dispatch])
+  
 
   // Getting the data: partners within distance
   let { data, isLoading, isSuccess, isError }: any =
@@ -31,14 +35,16 @@ const ListView: FC<ListViewProps> = ({ placeLat, placeLon, distance }) => {
     <PartnersContainer>
       <PartnersHolder>
         {isLoading ? (
-          <Skeletons flag={1} width={700} height={60} />
+          <Skeletons flag={1} width={700} height={90} />
         ) : isError ? (
           <Error error="Network Problem" />
         ) : isSuccess ? (
-          data &&
-          data?.map((partner: PartnerProps, index: number) => (
-            <PartnerView partner={partner} key={index} />
-          ))
+          data && data.length > 0 ?
+            data?.map((partner: PartnerProps, index: number) => (
+              <PartnerView partner={partner} key={index} />
+            ))
+            :
+            <Error error="No Partners within distance" />
         ) : (
           ""
         )}

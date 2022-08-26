@@ -1,4 +1,4 @@
-// Redux toolkit - current PayloadAction
+// Redux toolkit - current
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 //Types

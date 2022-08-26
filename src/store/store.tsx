@@ -7,7 +7,7 @@ import partnersReducer from "./partnersSlice";
 // ps Api
 import { psApi } from "./apiSlice";
 
-export const store = configureStore({
+export const store: any = configureStore({
   reducer: {
     [psApi.reducerPath]: psApi.reducer,
     partners: partnersReducer,

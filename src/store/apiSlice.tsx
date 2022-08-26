@@ -46,8 +46,9 @@ export const psApi = createApi({
       transformResponse: (partners: PartnersProps) => {
         // The returned array with all partners within 100km.
         let within100: object[] = [];
-
+        
         Object.values(partners).map((partner: PartnerProps) => {
+          //console.log('store', store)
           // The toFixed() method formats a number using fixed-point notation.
           const distance = distanceBetweenTwoPoints(
             partner.latitude,
@@ -57,7 +58,7 @@ export const psApi = createApi({
           ).toFixed(1);
 
           // Check partner within distance and add pic and distance to the object
-          if (Number(distance) < Number(store.getState().partners.distance)) {
+          if (Number(distance) < store.getState().partners.distance) {
             partner.pic = `${Math.floor(Math.random() * 4)}.jpg`;
             partner.distance = distance;
             within100.push(partner);
