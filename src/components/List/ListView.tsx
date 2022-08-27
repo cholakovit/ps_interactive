@@ -41,7 +41,7 @@ const ListView: FC<ListViewProps> = ({ placeLat, placeLon, distance }) => {
               )
             )
           ) : (
-            ""
+            <Error error="No partners within" />
           )
         ) : (
           ""
