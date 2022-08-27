@@ -1,10 +1,14 @@
 // Redux toolkit
 //import { current } from "@reduxjs/toolkit";
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import { store } from "./store";
+import { createEntityAdapter, createSelector } from "@reduxjs/toolkit";
 
 // Types
 import { PartnersProps, PartnerProps } from "./types";
+
+const partnersAdapter = createEntityAdapter({
+  selectId: (e: any) => e.partner_id,
+});
 
 // This function takes in latitude and longitude of two location and returns the distance between them (in km)
 export const distanceBetweenTwoPoints = (
@@ -35,41 +39,38 @@ export const toRad = (value: number) => {
   return (value * Math.PI) / 180;
 };
 
+const initialState = partnersAdapter.getInitialState();
+
 export const psApi = createApi({
   reducerPath: "psApi",
   baseQuery: fetchBaseQuery({ baseUrl: process.env.REACT_APP_PARTNERS }),
   tagTypes: ["Partners"],
   endpoints: (builder) => ({
     getPartners: builder.query({
-      query: () => "/partners",
-      //transformResponse: res => res.sort((a, b) => b.id - a.id),
-      transformResponse: (partners: PartnersProps) => {
+      query: () => `/partners/`,
+      transformResponse: (partners: PartnersProps, meta, arg) => {
         // The returned array with all partners within 100km.
         let within100: object[] = [];
-        
+
         Object.values(partners).map((partner: PartnerProps) => {
-          //console.log('store', store)
           // The toFixed() method formats a number using fixed-point notation.
           const distance = distanceBetweenTwoPoints(
             partner.latitude,
             partner.longitude,
-            Number(store.getState().partners.placeLat),
-            Number(store.getState().partners.placeLon)
+            Number(arg.placeLat),
+            Number(arg.placeLon)
           ).toFixed(1);
 
           // Check partner within distance and add pic and distance to the object
-          if (Number(distance) < store.getState().partners.distance) {
+          if (Number(distance) < arg.distance) {
             partner.pic = `${Math.floor(Math.random() * 4)}.jpg`;
             partner.distance = distance;
             within100.push(partner);
           }
-
-          return "";
         });
 
-        within100.sort((a: any, b: any) => a.partner_id - b.partner_id)
-
-        return within100;
+        within100.sort((a: any, b: any) => a.partner_id - b.partner_id);
+        return partnersAdapter.setAll(initialState, within100);
       },
       providesTags: ["Partners"],
     }),
@@ -77,3 +78,20 @@ export const psApi = createApi({
 });
 
 export const { useGetPartnersQuery } = psApi;
+
+// returns the query result object
+export const selectPartnersResult = psApi.endpoints.getPartners.select("");
+
+// Creates memoized selector
+const selectPartnersData: any = createSelector(
+  selectPartnersResult,
+  (partnersResult) => partnersResult.data // normalized state object with ids & entities
+);
+
+//getSelectors creates these selectors and we rename them with aliases using destructuring
+export const {
+  selectAll: selectAllPartners,
+  // Pass in a selector that returns the posts slice of state
+} = partnersAdapter.getSelectors(
+  (state) => selectPartnersData(state) ?? initialState
+);

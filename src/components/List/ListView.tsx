@@ -3,8 +3,6 @@ import { PartnersContainer, PartnersHolder } from "./List.styles";
 
 // Redux
 import { useGetPartnersQuery } from "../../store/apiSlice";
-import { useAppDispatch } from "../../store/hooks";
-import { setCoordinatesAndDistance } from "../../store/partnersSlice";
 
 // Components
 import Skeletons from "../Skeletons/SkeletonsView";
@@ -12,24 +10,21 @@ import Error from "../Error/Error";
 import PartnerView from "../Partner/PartnerView";
 
 // Types
-import { PartnerProps, ListViewProps } from "../../store/types";
+import { ListViewProps } from "../../store/types";
 
 // React Functional Component
-import { FC, useEffect } from "react";
+import { FC } from "react";
 
 const ListView: FC<ListViewProps> = ({ placeLat, placeLon, distance }) => {
-  const dispatch = useAppDispatch();
-  
-  useEffect(() => {
-    dispatch(setCoordinatesAndDistance({ placeLat, placeLon, distance }));
-  }, [placeLat, placeLon, distance, dispatch])
-  
-
   // Getting the data: partners within distance
-  let { data, isLoading, isSuccess, isError }: any =
-    useGetPartnersQuery(placeLat);
+  const {
+    currentData: partners,
+    isLoading,
+    isSuccess,
+    isError,
+  }: any = useGetPartnersQuery({ placeLat, placeLon, distance });
 
-  //console.log("params", distance);
+  //console.log("partners", partners?.entities);
 
   return (
     <PartnersContainer>
@@ -39,12 +34,15 @@ const ListView: FC<ListViewProps> = ({ placeLat, placeLon, distance }) => {
         ) : isError ? (
           <Error error="Network Problem" />
         ) : isSuccess ? (
-          data && data.length > 0 ?
-            data?.map((partner: PartnerProps, index: number) => (
-              <PartnerView partner={partner} key={index} />
-            ))
-            :
-            <Error error="No Partners within distance" />
+          partners?.entities && partners.ids.length > 0 ? (
+            Object.values(partners.entities).map(
+              (partner: any, index: number) => (
+                <PartnerView partner={partner} key={index} />
+              )
+            )
+          ) : (
+            ""
+          )
         ) : (
           ""
         )}
