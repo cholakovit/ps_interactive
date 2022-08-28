@@ -10,6 +10,8 @@ import { screen } from "@testing-library/react";
 // Return the store instance in case the test needs to dispatch more actions or check state
 import { renderWithProviders } from "../../test-utils";
 
+import { server, rest } from '../../testServer'
+
 test("Testing the PartnerView Component", () => {
 
     let partner = {
@@ -31,3 +33,19 @@ test("Testing the PartnerView Component", () => {
 
     expect(renderedPartner.length).toEqual(1)
 });
+
+
+it('handles failure', async () => {
+    server.use(
+        rest.get(process.env.REACT_APP_PARTNERS + '/partners', (req, res, ctx) => {
+            ctx.status(404)
+        })
+    ),
+    rest.get('*', (req, res, ctx) => {
+        console.error(`Please add request handler for ${req.url.toString()}`)
+        return res(
+            ctx.status(500),
+            ctx.json({ error: 'Please add request handler' })
+        )
+    })
+})

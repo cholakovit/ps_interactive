@@ -22,4 +22,5 @@ test("Testing the ListView Component", () => {
     renderWithProviders(<ListView placeLat={placeLat} placeLon={placeLon} distance={distance} />);
   
     expect(screen.getByText(/Partners within/i)).toBeInTheDocument()
+
 });
