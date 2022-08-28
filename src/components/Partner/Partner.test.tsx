@@ -1,20 +1,33 @@
 import PartnerView from './PartnerView';
-import { render } from "@testing-library/react";
+import { screen } from "@testing-library/react";
 
-import { store } from "../../store/store"
-import { Provider } from "react-redux"
+// The custom render function should let us:
+
+// Create a new Redux store instance every time it's called, with an optional preloadedState value that can be used for an initial value
+// Alternately pass in an already-created Redux store instance
+// Pass through additional options to RTL's original render function
+// Automatically wrap the component being tested with a <Provider store={store}>
+// Return the store instance in case the test needs to dispatch more actions or check state
+import { renderWithProviders } from "../../test-utils";
 
 test("Testing the PartnerView Component", () => {
 
     let partner = {
         latitude: 42.6661417,
         partner_id: 12,
-        name: 'Bluebell Robles',
+        name: 'Jamelia Waller',
         longitude: 23.293435,
         pic: '',
         distance: 100
     }
   
-    render(<Provider store={store}><PartnerView partner={partner} key={1} /></Provider>);
-  
+    renderWithProviders(<PartnerView partner={partner} key={1} />);
+
+    expect(screen.getByText('Name: ' + partner.name)).toBeInTheDocument()
+    expect(screen.getByText('ID: ' + partner.partner_id)).toBeInTheDocument()
+    expect(screen.getByText('Distance: ' + partner.distance + 'km.')).toBeInTheDocument()
+
+    const renderedPartner = screen.getAllByRole('partner')
+
+    expect(renderedPartner.length).toEqual(1)
 });

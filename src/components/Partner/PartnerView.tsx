@@ -10,7 +10,7 @@ import { PartnerProps } from '../../store/types'
 
 const PartnerView = (props: { partner: PartnerProps }) => {
   return (
-    <Partner>  
+    <Partner role='partner'>
         <AvatarHolder>
             <Avatar alt={`${props.partner.name}`} src={`../../assets/img/${props.partner.pic}`} />     
         </AvatarHolder> 
