@@ -18,7 +18,7 @@ export const distanceBetweenTwoPoints = (
   lon2: number
 ) => {
   const R: number = 6371; // Earth radius - km
-
+  
   let dLat = toRad(lat2 - lat1);
   let dLon = toRad(lon2 - lon1);
   let lat = toRad(lat1);
@@ -29,7 +29,7 @@ export const distanceBetweenTwoPoints = (
     Math.sin(dLon / 2) * Math.sin(dLon / 2) * Math.cos(lat) * Math.cos(lon);
   let c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
   let d = R * c;
-
+  
   return d;
 };
 
